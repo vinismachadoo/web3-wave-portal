@@ -25,6 +25,8 @@ const index = () => {
 
   const [message, setMessage] = useState("");
 
+  console.log("walletInstalled", walletInstalled);
+
   return (
     <>
       <Background />
