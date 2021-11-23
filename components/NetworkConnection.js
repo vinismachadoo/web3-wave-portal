@@ -5,7 +5,7 @@ const NetworkConnection = ({
   walletAccount,
   walletBalance,
 }) => {
-  if (walletInstalled && walletConnected && isRinkeby) {
+  if (walletConnected && isRinkeby) {
     const account = walletAccount.slice(walletAccount.length - 8);
     const balance = parseFloat(walletBalance).toFixed(5);
     return (
@@ -16,8 +16,16 @@ const NetworkConnection = ({
       </div>
     );
   }
+
   return (
-    <div className="text-black mb-4">⚠️ Please, switch to Rinkeby Network</div>
+    <div>
+      {walletConnected && !isRinkeby && (
+        <div className="text-black mb-4">
+          ⚠️ Please, switch to Rinkeby Network
+        </div>
+      )}
+      {!walletInstalled || (!walletConnected && <div></div>)}
+    </div>
   );
 };
 

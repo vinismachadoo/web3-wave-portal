@@ -43,6 +43,7 @@ const index = () => {
               setMessage={setMessage}
               isRinkeby={isRinkeby}
               waveLoading={waveLoading}
+              walletConnected={walletConnected}
             />
             <div className="text-right text-black w-5/6 md:w-2/3 p-0 my-1 text-xs md:text-sm font-semibold">
               {message.length} / {240 - message.length}

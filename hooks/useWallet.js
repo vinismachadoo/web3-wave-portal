@@ -7,14 +7,16 @@ export default function useWallet() {
   const [walletInstalled, setInstalled] = useState(false);
   const [walletConnected, setConnected] = useState(false);
   const [walletNetwork, setNetwork] = useState(null);
+  const [walletError, setWalletError] = useState(null);
   const [walletAccount, setAccount] = useState("");
   const [walletBalance, setBalance] = useState(0);
   const [totalWaves, setTotalWaves] = useState(0);
   const [waveList, setWaveList] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isRinkeby, setIsRinkeby] = useState(false);
   const [waveLoading, setWaveLoading] = useState(TRANSACTION_STATUS.None);
+
+  const isRinkeby = walletNetwork?.chainId === CHAIN_IDS.Rinkeby;
 
   // if MetaMask is installed
   const isWalletInstalled = () => {
@@ -34,7 +36,7 @@ export default function useWallet() {
 
   const connectWallet = () => {
     return window.ethereum
-      .request({ method: "eth_accounts" })
+      .request({ method: "eth_requestAccounts" })
       .then((accountList) => {
         setAccount(accountList[0]);
       })
@@ -43,7 +45,6 @@ export default function useWallet() {
       });
   };
 
-  // get Wallet Network
   const getWalletNetwork = () => {
     if (!window.ethereum) {
       return false;
@@ -52,13 +53,14 @@ export default function useWallet() {
     return provider.getNetwork();
   };
 
-  const trackChanges = () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-
-    provider.on("accountsChanged", (accounts) => {
+  const trackAccountChanges = () => {
+    window.ethereum.on("accountsChanged", async function (accounts) {
       setAccount(accounts[0]);
     });
+  };
 
+  const trackNetworkChanges = () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     provider.on("network", (newNetwork, oldNetwork) => {
       // When a Provider makes its initial connection, it emits a "network"
       // event with a null oldNetwork along with the newNetwork. So, if the
@@ -109,12 +111,12 @@ export default function useWallet() {
   };
 
   const updateWaves = useCallback(
-    (isRinkeby) => {
+    (walletConnected, isRinkeby) => {
       const runUpdates = async () => {
         setTotalWaves(await getTotalWaves());
         setWaveList(await getAllWaves());
       };
-      if (isRinkeby) {
+      if (walletConnected && isRinkeby) {
         runUpdates();
       }
     },
@@ -140,7 +142,7 @@ export default function useWallet() {
 
   useEffect(() => {
     subscribeToWaveEvents((newWave) => {
-      updateWaves();
+      updateWaves(walletConnected, isRinkeby);
     });
     // SUBSCRICE ONCE when mounting the component
   }, []);
@@ -181,7 +183,7 @@ export default function useWallet() {
         // wait for wave to finish
         await transaction.wait();
         // update
-        updateWaves();
+        updateWaves(walletConnected, isRinkeby);
         // update wave status to begin
         setWaveLoading(TRANSACTION_STATUS.None);
       })
@@ -203,7 +205,8 @@ export default function useWallet() {
       // get network
       setNetwork(await getWalletNetwork());
       // track changes
-      trackChanges();
+      trackAccountChanges();
+      trackNetworkChanges();
       // stop loading
       setIsLoading(false);
     };
@@ -211,29 +214,39 @@ export default function useWallet() {
   }, []);
 
   useEffect(() => {
-    if (walletNetwork) {
-      setIsRinkeby(walletNetwork.chainId === CHAIN_IDS.Rinkeby);
-    }
-    connectWallet();
-  }, [walletNetwork]);
+    updateWaves(walletConnected, isRinkeby);
+  }, [walletConnected, isRinkeby]);
 
   useEffect(() => {
-    updateWaves(isRinkeby);
-  }, [isRinkeby]);
+    const getAccount = async () => {
+      if (walletConnected) {
+        // set account
+        const accounts = await window.ethereum.request({
+          method: "eth_accounts",
+        });
+        setAccount(accounts[0]);
+      }
+    };
+    getAccount();
+  }, [walletConnected]);
 
   useEffect(() => {
     const getBalance = async () => {
-      if (walletAccount) {
-        const provider = new ethers.providers.Web3Provider(
-          window.ethereum,
-          "any"
-        );
-
-        const balance = await provider.getBalance(walletAccount);
-        setBalance(ethers.utils.formatEther(balance));
-      }
+      const provider = new ethers.providers.Web3Provider(
+        window.ethereum,
+        "any"
+      );
+      const balance = await provider.getBalance(walletAccount);
+      setBalance(ethers.utils.formatEther(balance));
     };
-    getBalance();
+    const updateWalletConnected = async () => {
+      setConnected(await isWalletConnected());
+    };
+
+    if (walletAccount) {
+      getBalance();
+      updateWalletConnected();
+    }
   }, [walletAccount]);
 
   return {
