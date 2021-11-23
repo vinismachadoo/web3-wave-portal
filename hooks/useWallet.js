@@ -204,14 +204,19 @@ export default function useWallet() {
       setConnected(await isWalletConnected());
       // get network
       setNetwork(await getWalletNetwork());
-      // track changes
-      trackAccountChanges();
-      trackNetworkChanges();
       // stop loading
       setIsLoading(false);
     };
     runUpdates();
   }, []);
+
+  useEffect(() => {
+    if (walletInstalled) {
+      // track changes
+      trackAccountChanges();
+      trackNetworkChanges();
+    }
+  }, [walletInstalled]);
 
   useEffect(() => {
     updateWaves(walletConnected, isRinkeby);
