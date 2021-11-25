@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Background from "../components/Background";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import WalletButton from "../components/WalletButton";
 import Message from "../components/Message";
@@ -25,14 +26,12 @@ const index = () => {
 
   const [message, setMessage] = useState("");
 
-  console.log("walletInstalled", walletInstalled);
-
   return (
     <>
       <Background />
       <div className="items-center flex justify-center py-24">
         <div className="overflow-y-auto z-10 w-4/5 md:w-3/4 lg:w-2/3">
-          <div className="bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 bg-white w-full max-h-full rounded-xl items-center flex flex-col justify-center text-white text-center py-10 px-2 md:px-6">
+          <div className="bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 bg-white w-full max-h-full rounded-xl items-center flex flex-col justify-center text-white text-center pt-10 pb-6 px-2 md:px-6">
             <NetworkConnection
               walletInstalled={walletInstalled}
               walletConnected={walletConnected}
@@ -59,6 +58,7 @@ const index = () => {
               message={message}
               waveLoading={waveLoading}
             />
+            <Footer />
           </div>
           <WaveTransaction waveLoading={waveLoading} />
           <WaveList waveList={waveList} />

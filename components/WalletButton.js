@@ -21,14 +21,14 @@ const WalletButton = ({
     <div>
       {!walletInstalled && (
         <a href="https://metamask.io/download.html" target="_blank">
-          <button className="px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-purple-500 bg-purple-500 hover:bg-transparent hover:text-purple-500">
+          <button className="px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black hover:bg-transparent hover:text-black">
             Install MetaMask ⬇️
           </button>
         </a>
       )}
       {walletInstalled && !walletConnected && (
         <button
-          className="px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-purple-500 bg-purple-500 hover:bg-transparent hover:text-purple-500"
+          className="px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black hover:bg-transparent hover:text-black"
           onClick={() => connectWallet()}
         >
           Connect Wallet 🦊
@@ -41,11 +41,11 @@ const WalletButton = ({
             message && waveLoading === TRANSACTION_STATUS.None
               ? "hover:bg-transparent hover:border-black hover:text-black"
               : "opacity-50 cursor-not-allowed",
-            "px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-purple-500 bg-purple-500"
+            "px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black"
           )}
           onClick={() => sendWave(message)}
         >
-          Wave at me 👋 {walletConnected}
+          Wave at me 👋
         </button>
       )}
     </div>
