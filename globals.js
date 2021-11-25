@@ -13,3 +13,7 @@ export const CHAIN_IDS = {
 
 // address on rinkeby
 export const CONTRACT_ADDRESS = "0xBBe23FBaAC416cC1F7986467aeB34EAe9004Ed28";
+export const TWITTER_LINK = "https://twitter.com/";
+export const TWITTER_USERNAME = "ovinisanches";
+export const GITHUB_LINK = "https://github.com/";
+export const GITHUB_USERNAME = "vinismachadoo";

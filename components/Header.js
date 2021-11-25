@@ -5,7 +5,7 @@ const Header = () => {
         <img
           className="h-16 md:h-24 w-16 md:w-24"
           src="/eth-dynamic-color.png"
-          alt="etherium"
+          alt="ethereum"
         />
       </div>
       <div className="text-left">
