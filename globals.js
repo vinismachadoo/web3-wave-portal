@@ -12,7 +12,7 @@ export const CHAIN_IDS = {
 };
 
 // address on rinkeby
-export const CONTRACT_ADDRESS = "0xBBe23FBaAC416cC1F7986467aeB34EAe9004Ed28";
+export const CONTRACT_ADDRESS = "0x590457C6a03851F7d58Fc1a3bf3C93Ee4CD5f775";
 export const TWITTER_LINK = "https://twitter.com/";
 export const TWITTER_USERNAME = "ovinisanches";
 export const GITHUB_LINK = "https://github.com/";

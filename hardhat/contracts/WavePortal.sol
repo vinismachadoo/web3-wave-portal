@@ -23,7 +23,14 @@ contract WavePortal {
     constructor() payable {
         console.log("This is my first smart contract");
         seed = (block.timestamp + block.difficulty) % 100;
+        console.log(seed);
     }
+
+    // Function to receive Ether. msg.data must be empty
+    receive() external payable {}
+
+    // Fallback function is called when msg.data is not empty
+    fallback() external payable {}
 
     function wave(string memory _message) public { // make the function available to be called at run.js
 
@@ -40,8 +47,9 @@ contract WavePortal {
         waves.push(Wave(msg.sender, _message, block.timestamp)); // store the wave data in the array
 
         seed = (block.difficulty + block.timestamp + seed) % 100; // new seed value for the next transaction
+        console.log(seed);
 
-        if (seed <= 1) { // 1% chance of winning 
+        if (seed <= 10) { // 10% chance of winning 
             console.log("%s won!", msg.sender);
             uint256 prizeAmount = 0.0001 ether;
 
@@ -63,4 +71,5 @@ contract WavePortal {
         console.log("We have %d total waves!", totalWaves);
         return totalWaves;
     }
+
 }

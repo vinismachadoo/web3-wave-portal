@@ -18,11 +18,16 @@ const WalletButton = ({
   }
 
   return (
-    <div>
+    <div className="mt-2">
       {!walletInstalled && (
         <a href="https://metamask.io/download.html" target="_blank">
           <button className="px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black hover:bg-transparent hover:text-black">
-            Install MetaMask ⬇️
+            Install MetaMask
+            <img
+              src="/download.png"
+              alt="download"
+              className="w-3 sm:w-4 h-3 sm:h-4 ml-2"
+            />
           </button>
         </a>
       )}
@@ -31,7 +36,12 @@ const WalletButton = ({
           className="px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black hover:bg-transparent hover:text-black"
           onClick={() => connectWallet()}
         >
-          Connect Wallet 🦊
+          Connect Wallet
+          <img
+            src="/metamask.png"
+            alt="metamask"
+            className="w-3 sm:w-4 h-3 sm:h-4 ml-2"
+          />
         </button>
       )}
       {walletConnected && (
@@ -41,11 +51,16 @@ const WalletButton = ({
             message && waveLoading === TRANSACTION_STATUS.None
               ? "hover:bg-transparent hover:border-black hover:text-black"
               : "opacity-50 cursor-not-allowed",
-            "px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black"
+            "flex items-center px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black"
           )}
           onClick={() => sendWave(message)}
         >
-          Wave at me 👋
+          Wave at me
+          <img
+            src="/wave.png"
+            alt="wave"
+            className="w-3 sm:w-4 h-3 sm:h-4 ml-2"
+          />
         </button>
       )}
     </div>
