@@ -18,6 +18,13 @@ const Footer = () => {
       <a href={`${GITHUB_LINK}${GITHUB_USERNAME}`} target="_blank">
         <img className="w-4 h-4 mx-1" src="/github.png" alt="github" />
       </a>
+      <p className="mx-1">&rarr;</p>
+      {/* <a
+        href={`https://rinkeby.etherscan.io/address/${CONTRACT_ADDRESS}#code`}
+        target="_blank"
+      > */}
+      <p className="underline">Read contract on Etherscan</p>
+      {/* </a> */}
     </div>
   );
 };
