@@ -28,3 +28,4 @@ runMain();
 
 // on a new terminal -> npx hardhat node :: create a local node and 20 new wallets for us to test
 // on a new terminal -> npx hardhat run scripts/deploy.js --network localhost :: deploy it to the local node
+// on a new terminal -> npx hardhat run scripts/deploy.js --network rinkeby :: deploy it to the local node
