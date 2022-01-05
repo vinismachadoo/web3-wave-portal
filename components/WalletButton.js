@@ -21,7 +21,7 @@ const WalletButton = ({
     <div className="mt-2">
       {!walletInstalled && (
         <a href="https://metamask.io/download.html" target="_blank">
-          <button className="px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black hover:bg-transparent hover:text-black">
+          <button className="flex items-center px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black hover:bg-transparent hover:text-black">
             Install MetaMask
             <img
               src="/download.png"
@@ -33,7 +33,7 @@ const WalletButton = ({
       )}
       {walletInstalled && !walletConnected && (
         <button
-          className="px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black hover:bg-transparent hover:text-black"
+          className="flex items-center px-3 py-0.5 text-sm md:text-lg rounded-lg border-2 border-black bg-black hover:bg-transparent hover:text-black"
           onClick={() => connectWallet()}
         >
           Connect Wallet
