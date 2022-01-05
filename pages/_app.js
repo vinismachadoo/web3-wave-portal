@@ -1,4 +1,4 @@
-import "tailwindcss/tailwind.css";
+import "../styles/globals.css";
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Wave Portal</title>
-        <link rel="icon" href="/icon.png" />
+        <link rel="icon" href="/wave.png" />
       </Head>
       <Component {...pageProps} />
     </>
