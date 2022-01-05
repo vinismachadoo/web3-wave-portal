@@ -30,7 +30,7 @@ const index = () => {
     <>
       <Background />
       <div className="items-center flex justify-center py-24">
-        <div className="overflow-y-auto z-10 w-4/5 md:w-3/4 lg:w-2/3">
+        <div className="overflow-y-auto w-4/5 md:w-3/4 lg:w-2/3">
           <div className="bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 bg-white w-full max-h-full rounded-xl items-center flex flex-col justify-center text-white text-center pt-10 pb-6 px-2 md:px-6">
             <NetworkConnection
               walletInstalled={walletInstalled}

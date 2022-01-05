@@ -11,12 +11,12 @@ const WaveList = ({ waveList }) => {
             className="my-2 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 z-0 bg-white rounded-xl p-3"
             key={index}
           >
-            <div className="flex">
-              <div className="hidden sm:flex items-center mx-3 z-30">
+            <div className="flex bg-transparent bg-opacity-100 z-50">
+              <div className="hidden sm:flex items-center ml-3 mr-5 z-50">
                 <img
                   src="/wave.png"
                   alt="wave"
-                  className="w-4 sm:w-8 h-4 sm:h-8 mx-auto opacity-100"
+                  className="w-4 sm:w-8 h-4 sm:h-8 mx-auto bg-opacity-100"
                 />
               </div>
               <div className="w-full">
